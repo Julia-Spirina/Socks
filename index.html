@@ -19,11 +19,13 @@
 
         <div class="product-image">
             <img :src="image" :alt="altText" />
-            <a :href="link">More products like this</a>
+<!--            <a :href="link">More products like this</a>-->
         </div>
 
         <div class="product-info">
             <h1>{{ product }}</h1>
+            <p v-if="inStock">In Stock</p>
+            <p v-else>Out of Stock</p>
         </div>
 
     </div>
