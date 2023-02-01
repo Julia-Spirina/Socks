@@ -6,16 +6,15 @@ Vue.component('product-tabs', {
         }
     },
     template: `
-   <div>
-   <ul>
-<!--     <span class="tab" -->
-<!--         :class="{ activeTab: selectedTab === tab }"-->
-<!--         v-for="(tab, index) in tabs" -->
-<!--         @click="selectedTab = tab"-->
-<!--&lt;!&ndash;         :key="index"&ndash;&gt;-->
-<!--     >{{ tab }}</span>-->
-     </ul>
-     <div>
+     <div>   
+       <ul>
+         <span class="tab"
+               :class="{ activeTab: selectedTab === tab }"
+               v-for="(tab, index) in tabs"
+               @click="selectedTab = tab"
+         >{{ tab }}</span>
+       </ul>
+       <div>
          <p v-if="!reviews.length">There are no reviews yet.</p>
          <ul>
            <li v-for="review in reviews">
@@ -25,22 +24,26 @@ Vue.component('product-tabs', {
            </li>
          </ul>
        </div>
-               <product-review @review-submitted="addReview"></product-review>
-    
-   </div>
+       <div v-show="selectedTab === 'Make a Review'">
+        <product-review @review-submitted="addReview"></product-review>
+        </div>
+     </div>
+     
+
  `,
     data() {
         return {
             tabs: ['Reviews', 'Make a Review'],
-            selectedTab: 'Reviews'
+            selectedTab: 'Reviews'  // устанавливается с помощью @click
         }
     },
     methods: {
         addReview(productReview) {
             this.reviews.push(productReview)
         }
-    },
+    }
 })
+
 Vue.component('product-review', {
     template: `
     <form class="review-form" @submit.prevent="onSubmit">
@@ -148,15 +151,15 @@ Vue.component('product', {
                Add to cart
            </button>
            <div>
-            <h2>Reviews</h2>
-            <p v-if="!reviews.length">There are no reviews yet.</p>
-            <ul>
-              <li v-for="review in reviews">
-              <p>{{ review.name }}</p>
-              <p>Rating: {{ review.rating }}</p>
-              <p>{{ review.review }}</p>
-              </li>
-            </ul>
+<!--            <h2>Reviews</h2>-->
+<!--            <p v-if="!reviews.length">There are no reviews yet.</p>-->
+<!--            <ul>-->
+<!--              <li v-for="review in reviews">-->
+<!--              <p>{{ review.name }}</p>-->
+<!--              <p>Rating: {{ review.rating }}</p>-->
+<!--              <p>{{ review.review }}</p>-->
+<!--              </li>-->
+<!--            </ul>-->
             
 
             <product-tabs :reviews="reviews"></product-tabs>
