@@ -202,6 +202,7 @@ Vue.component('product', {
                 }
             ],
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+
             // cart: 0,
             reviews: [],
             // onSale: true,
@@ -284,7 +285,13 @@ Vue.component('product-information', {
              {{ tab }}</span>
         </ul>
         <div v-show="selectedTab === 'Shipping'">
-            <p>{{shipping}}</p>
+
+
+            <select>
+                <option v-for="shipping in shippings">{{ shipping }}</option>
+            </div>
+            
+
         </div>
         <div v-show="selectedTab === 'Details'">
             <product-details :details="details"></product-details>
@@ -304,7 +311,8 @@ Vue.component('product-information', {
     data() {
         return {
             tabs: ['Shipping', 'Details'],
-            selectedTab: 'Shipping'
+            selectedTab: 'Shipping',
+            shippings: ['fast','slow','urgent','pickup','Russian post']
         }
     },
 })
